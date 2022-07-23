@@ -1,12 +1,17 @@
 import requests
 import smtplib
+import os
+from dotenv import load_dotenv
 
-USER = "nicowishesyouahappybirthday@gmail.com"
-PASSWORD = "xmebpypmfzhilrnk"
-ENDPOINT = "https://api.openweathermap.org/data/2.5/onecall"
-API_KEY = "37ff893b831e3986eb1092909ee0ebde"
-LAT = "56.162937"
-LON = "10.203921"
+load_dotenv()
+
+USER = os.getenv('USER')
+PASSWORD = os.getenv('PASSWORD')
+ENDPOINT = os.getenv('ENDPOINT')
+API_KEY = os.getenv('API_KEY')
+LAT = os.getenv('LAT')
+LON = os.getenv('LON')
+
 
 weather_params = {
     "appid": API_KEY,
@@ -39,12 +44,3 @@ if will_rain:
             to_addrs="nicolajlpedersen@gmail.com",
             msg=f"Subject: IT RAINS!\n\nIt will rain at:\n\n{rain_total}"
         )
-
-# will_rain = False
-# will_it_rain = data["hourly"][:11]
-# for x in will_it_rain:
-#     if x["weather"][0]["id"] < 700:
-#         will_rain = True
-#
-# if will_rain:
-#     print(f"hallelujah, it will rain! Bring an umbrella.")
